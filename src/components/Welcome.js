@@ -9,7 +9,7 @@ const Welcome = (props) => {
         }
         {
           !props.isTeacher &&
-          <p>{`Hello ${props.name}, I am a student ${props.count}`}</p>
+          <p>{`Hello ${props.name}, I am a student`}</p>
         }
       </div>
     );
