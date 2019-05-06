@@ -5,11 +5,11 @@ const Welcome = (props) => {
       <div>
         {
           props.isTeacher && 
-          <h2>Hello, {props.name}, I am a Teacher</h2>
+          <h2>Hello, {props.name}, I am a Teacher {props.count}</h2>
         }
         {
           !props.isTeacher &&
-          <p>{`Hello ${props.name}, I am a student`}</p>
+          <p>{`Hello ${props.name}, I am a student ${props.count}`}</p>
         }
       </div>
     );
