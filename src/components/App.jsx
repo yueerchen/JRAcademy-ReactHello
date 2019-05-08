@@ -1,14 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
 import './App.css';
-import Welcome from './Welcome';
+import WelcomeList from './WelcomeList';
 import Counter from './Counter';
-
-// const welcomeList = [
-//   {id:1, name: 'Nick', isTeacher:true },
-//   {id:2, name: 'Tim', isTeacher:false },
-//   {id:3, name: 'Sam', isTeacher:false },
-// ];
+import WelcomeForm from "./WelcomeForm";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,18 +11,12 @@ class App extends React.Component {
   }
 
   render() {
-    const {count, diff, dispatch} = this.props;
+    const {welcomeList, count, diff, dispatch} = this.props;
     return (
       <section className="App">
-        {
-          this.props.welcomeList.map((element, index) => 
-          (
-            <div key={index}>
-              <Welcome name={element.name} isTeacher={element.isTeacher} count={count}/>
-            </div>)
-          )
-        }
-          <Counter count={count} diff={diff} dispatch={dispatch}/>  
+        <WelcomeList welcomeList={welcomeList}/>
+        <Counter count={count} diff={diff} dispatch={dispatch}/>
+        <WelcomeForm/>
       </section>
     );
   }
