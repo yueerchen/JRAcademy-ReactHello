@@ -4,10 +4,15 @@ import './App.css';
 import WelcomeList from './WelcomeList';
 import Counter from './Counter';
 import WelcomeForm from "./WelcomeForm";
+import { getWelcomeAsync } from '../actions/welcomeActions';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getWelcomeAsync());
   }
 
   render() {
@@ -16,7 +21,7 @@ class App extends React.Component {
       <section className="App">
         <WelcomeList welcomeList={welcomeList}/>
         <Counter count={count} diff={diff} dispatch={dispatch}/>
-        <WelcomeForm/>
+        <WelcomeForm dispatch={dispatch}/>
       </section>
     );
   }
