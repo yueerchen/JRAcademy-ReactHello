@@ -1,50 +1,59 @@
-import React from 'react';
-import './App.css';
-import Welcome from './Welcome';
-import Counter from './Counter';
+import React from "react";
+import "./App.css";
+import Welcome from "./Welcome";
+import Counter from "./Counter";
+import WelcomeForm from "./WelcomeForm";
+import { connect } from "react-redux";
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = { count:0 };
-    console.log('APP constructor');
+    console.log("APP constructor");
   }
 
   componentDidMount() {
-    console.log('APP componentDidMount');
+    console.log("APP componentDidMount");
   }
 
   componentDidUpdate() {
-    console.log('APP componentDidUpdate');
+    console.log("APP componentDidUpdate");
   }
+  handleAdd = e => {
+    this.setState((preState, props) => ({ count: preState.count + 1 }));
+  };
 
-  handleAdd = (e)=>{
-    this.setState((preState, props) => ({count:preState.count+1}));
-  }
-
-  handleSubtract = (e)=>{
+  handleSubtract = e => {
     this.setState((preState, props) => {
       return {
         count: preState.count - 1
       };
     });
-  }
+  };
 
   render() {
-    console.log('App render');
+    console.log("App render");
     return (
       <section className="App">
-          <Welcome name={'Nick'} count={this.state.count} isTeacher />
-          <Welcome name="Tim" count={this.state.count} />
-          <Welcome name={'test'} count={this.state.count} />
-          <Counter 
-            count={this.state.count} 
-            handleAdd={this.handleAdd}
-            handleSubtract={this.handleSubtract}
+        {this.props.welcomeList.map((welcome, index) => (
+          <Welcome
+            key={index}
+            name={welcome.name}
+            isTeacher={welcome.isTeacher}
+            count={this.props.count}
           />
+        ))}
+        <WelcomeForm />
+        <Counter />
       </section>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    count: state.count,
+    welcomeList: state.welcomeList
+  };
+};
+
+export default connect(mapStateToProps)(App);
